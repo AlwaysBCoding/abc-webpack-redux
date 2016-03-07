@@ -19,9 +19,9 @@ const initialState = {
 function playerReducer(state=initialState, action) {
   switch (action.type) {
     case 'SET_ACTIVE_PLAYER':
-      const newState = state;
-      newState.activePlayer = action.activePlayer;
-      return newState
+      return Object.assign({}, state, {
+        activePlayer: action.activePlayer,
+      })
     default:
       return state
   }
@@ -32,6 +32,7 @@ const store = createStore(playerReducer)
 class NakedApp extends Component {
   constructor(props) {
     super(props)
+    this.handleNewActivePlayer = this.handleNewActivePlayer.bind(this);
   }
   render() {
     return (
@@ -47,9 +48,7 @@ class NakedApp extends Component {
     )
   }
   handleNewActivePlayer(newPlayer) {
-    debugger;
-    this.prop
-    s.dispatch({
+    this.props.dispatch({
       type: 'SET_ACTIVE_PLAYER',
       activePlayer: newPlayer,
     })
